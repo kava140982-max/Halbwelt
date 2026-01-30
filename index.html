@@ -1,328 +1,939 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indiens Seele - Für Rena</title>
+    <title>Kosmische Reise – Für Rena, die Löwin der Sterne</title>
     
-    <meta property="og:title" content="Indiens Seele - Eine Reise für Rena">
-    <meta property="og:description" content="20 heilige Stätten: Eine spirituelle Reise durch Tempel und Kultur.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:url" content="https://kava82.github.io/Rena/">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Kosmische Reise – Eine multidimensionale Erfahrung für Rena">
+    <meta property="og:description" content="Indiens heilige Stätten jenseits der Zeit und des Raums">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1535551951406-a19828b8a76b?w=1200&q=80">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --gold: #d4af37;
-            --deep-red: #800000;
-            --bg-dark: #0f0f0f;
-            --text-light: #f4f4f4;
+            --cosmic-gold: #ffd700;
+            --deep-space: #050508;
+            --nebula-purple: #1a0b2e;
+            --chakra-red: #ff3d3d;
+            --chakra-orange: #ff9d00;
+            --chakra-yellow: #ffeb3b;
+            --chakra-green: #4caf50;
+            --chakra-blue: #2196f3;
+            --chakra-indigo: #3f51b5;
+            --chakra-violet: #9c27b0;
+            --leo-gold: #ffb700;
+            --spirit-mist: rgba(255, 255, 255, 0.03);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Lora', serif;
-            line-height: 1.6;
+            background: var(--deep-space);
+            color: #f0f0f0;
+            font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
+            line-height: 1.8;
         }
 
-        h1, h2, h3 {
+        /* Kosmischer Hintergrund */
+        #cosmic-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        /* Geisterhafte Nebel */
+        .spirit-mist {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 48, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(76, 201, 240, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+            animation: mistFlow 20s ease-in-out infinite;
+        }
+
+        @keyframes mistFlow {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(2deg); opacity: 0.7; }
+        }
+
+        /* Leo Konstellation für Rena */
+        .leo-constellation {
+            position: fixed;
+            top: 10%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            opacity: 0.4;
+            z-index: -1;
+            pointer-events: none;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Audio Control */
+        #audio-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 183, 0, 0.05));
+            border: 1px solid var(--cosmic-gold);
+            color: var(--cosmic-gold);
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
             font-family: 'Cinzel', serif;
-            color: var(--gold);
-            text-align: center;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
-        /* Hero Sektion */
+        #audio-control:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Scroll Progress als Chakra-Balken */
+        .chakra-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--chakra-red) 0%, 
+                var(--chakra-orange) 14%,
+                var(--chakra-yellow) 28%,
+                var(--chakra-green) 42%,
+                var(--chakra-blue) 56%,
+                var(--chakra-indigo) 70%,
+                var(--chakra-violet) 84%,
+                var(--cosmic-gold) 100%);
+            z-index: 1001;
+            width: 0%;
+            transition: width 0.1s;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1524492707947-2f85a643199c?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            padding: 2rem;
             text-align: center;
-            padding: 20px;
+            overflow: hidden;
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
-        .hero p { font-style: italic; font-size: 1.2rem; max-width: 600px; }
-
-        /* Audio Button */
-        #audio-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 50px;
-            font-family: 'Cinzel', serif;
-            transition: all 0.3s;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+            pointer-events: none;
         }
 
-        #audio-control:hover { background: var(--gold); color: black; }
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
 
-        /* Stationen Container */
-        .container {
+        .hero-content {
+            position: relative;
+            z-index: 1;
             max-width: 900px;
-            margin: 0 auto;
-            padding: 50px 20px;
         }
 
-        .station {
-            background: rgba(255,255,255,0.05);
-            border-left: 3px solid var(--gold);
-            margin-bottom: 40px;
-            padding: 30px;
-            border-radius: 0 15px 15px 0;
+        .dedication {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--leo-gold);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInDown 2s ease forwards;
+            text-shadow: 0 0 20px rgba(255, 183, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            background: linear-gradient(135deg, #fff 0%, var(--cosmic-gold) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 2s ease 0.5s forwards;
+            filter: drop-shadow(0 0 30px rgba(255,215,0,0.3));
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease 1s forwards;
+        }
+
+        .om-symbol {
+            font-size: 4rem;
+            color: var(--cosmic-gold);
+            margin-top: 2rem;
+            opacity: 0;
+            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+            animation-delay: 1.5s, 1.5s;
+            cursor: pointer;
             transition: transform 0.3s;
         }
 
-        .station:hover { transform: translateX(10px); }
-
-        .station h2 { text-align: left; margin-bottom: 5px; font-size: 1.8rem; }
-        .location { color: var(--gold); font-weight: bold; margin-bottom: 15px; display: block; font-family: 'Cinzel'; font-size: 0.9rem;}
-
-        /* Mehr Lesen Logik */
-        .full-text {
-            display: none;
-            margin-top: 15px;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
-            padding-top: 15px;
+        .om-symbol:hover {
+            transform: scale(1.2) rotate(360deg);
         }
 
-        .read-more-btn {
-            background: none;
-            border: none;
-            color: var(--gold);
-            cursor: pointer;
-            font-family: 'Cinzel';
-            font-weight: bold;
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.8; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px var(--cosmic-gold), 0 0 40px var(--cosmic-gold); }
+            to { text-shadow: 0 0 40px var(--cosmic-gold), 0 0 80px var(--cosmic-gold), 0 0 100px #ff6b35; }
+        }
+
+        @keyframes fadeInDown {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--cosmic-gold);
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        /* Portal Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        /* Dimensions-Stationen */
+        .dimension {
+            margin-bottom: 100px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dimension.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dimension-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,215,0,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: all 0.5s ease;
+        }
+
+        .dimension-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 30px rgba(255,215,0,0.1);
+            border-color: rgba(255,215,0,0.3);
+        }
+
+        /* Chakra-Farbkodierung für jede Station */
+        .dimension:nth-child(7n+1) .dimension-number { color: var(--chakra-red); text-shadow: 0 0 20px var(--chakra-red); }
+        .dimension:nth-child(7n+2) .dimension-number { color: var(--chakra-orange); text-shadow: 0 0 20px var(--chakra-orange); }
+        .dimension:nth-child(7n+3) .dimension-number { color: var(--chakra-yellow); text-shadow: 0 0 20px var(--chakra-yellow); }
+        .dimension:nth-child(7n+4) .dimension-number { color: var(--chakra-green); text-shadow: 0 0 20px var(--chakra-green); }
+        .dimension:nth-child(7n+5) .dimension-number { color: var(--chakra-blue); text-shadow: 0 0 20px var(--chakra-blue); }
+        .dimension:nth-child(7n+6) .dimension-number { color: var(--chakra-indigo); text-shadow: 0 0 20px var(--chakra-indigo); }
+        .dimension:nth-child(7n+7) .dimension-number { color: var(--chakra-violet); text-shadow: 0 0 20px var(--chakra-violet); }
+
+        .dimension-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .dimension-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #fff;
+            flex: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .location {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--cosmic-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             margin-top: 10px;
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
-        .read-more-btn::after { content: ' ▼'; font-size: 0.7rem; margin-left: 5px; }
-        .read-more-btn.active::after { content: ' ▲'; }
+        .location::before {
+            content: '◆';
+            font-size: 0.5rem;
+        }
 
+        .dimension-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 20px;
+        }
+
+        /* Portal-Text (mehr lesen) */
+        .portal-text {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+            opacity: 0;
+            border-top: 1px solid rgba(255,215,0,0.1);
+            margin-top: 20px;
+        }
+
+        .portal-text.open {
+            max-height: 1000px;
+            opacity: 1;
+            padding-top: 20px;
+        }
+
+        .portal-btn {
+            background: transparent;
+            border: 1px solid rgba(255,215,0,0.3);
+            color: var(--cosmic-gold);
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .portal-btn:hover::before {
+            left: 100%;
+        }
+
+        .portal-btn:hover {
+            background: rgba(255,215,0,0.1);
+            border-color: var(--cosmic-gold);
+            box-shadow: 0 0 20px rgba(255,215,0,0.2);
+        }
+
+        /* Geister-Erscheinungen */
+        .spirit-orb {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+            filter: blur(20px);
+        }
+
+        .dimension:hover .spirit-orb {
+            opacity: 1;
+            animation: drift 10s infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 10px); }
+        }
+
+        /* Nachwort */
         .nachwort {
             text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(transparent, rgba(212, 175, 55, 0.1));
+            padding: 150px 20px;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(26,11,46,0.5) 0%, transparent 70%);
         }
 
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; opacity: 0.6; }
+        .nachwort h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--cosmic-gold);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.2rem; }
-            .station { padding: 20px; }
+        .nachwort h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cosmic-gold), transparent);
+        }
+
+        .nachwort p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.3rem;
+            line-height: 2;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .namaste {
+            font-size: 4rem;
+            color: var(--cosmic-gold);
+            margin-top: 40px;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .leo-footer {
+            color: var(--leo-gold);
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .dimension-card { padding: 25px; }
+            h2 { font-size: 1.5rem; }
+            .dimension-number { font-size: 2rem; }
+            #audio-control { bottom: 20px; right: 20px; padding: 12px 20px; }
+        }
+
+        /* Auswahl-Farbe */
+        ::selection {
+            background: rgba(255,215,0,0.3);
+            color: #fff;
+        }
+
+        /* Cursor-Effekt */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s;
         }
     </style>
 </head>
 <body>
 
-    <button id="audio-control" onclick="toggleAudio()">♫ Musik An</button>
+    <!-- Kosmischer Hintergrund -->
+    <canvas id="cosmic-canvas"></canvas>
+    <div class="spirit-mist"></div>
+    
+    <!-- Leo Konstellation -->
+    <svg class="leo-constellation" viewBox="0 0 200 200">
+        <path d="M 40 140 L 60 100 L 100 90 L 140 100 L 160 140" stroke="rgba(255,183,0,0.6)" stroke-width="1" fill="none"/>
+        <circle cx="40" cy="140" r="3" fill="#ffb700"/>
+        <circle cx="60" cy="100" r="2" fill="#fff"/>
+        <circle cx="100" cy="90" r="3" fill="#ffb700"/>
+        <circle cx="140" cy="100" r="2" fill="#fff"/>
+        <circle cx="160" cy="140" r="4" fill="#ffb700"/>
+        <path d="M 100 90 L 100 40" stroke="rgba(255,183,0,0.4)" stroke-width="1"/>
+        <circle cx="100" cy="40" r="3" fill="#ffb700"/>
+    </svg>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursor"></div>
+
+    <!-- Progress Bar -->
+    <div class="chakra-progress" id="progress"></div>
+
+    <!-- Audio Control -->
+    <button id="audio-control" onclick="toggleAudio()">♫ Aura öffnen</button>
     <audio id="bg-music" loop>
-        <source src="sound.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=indian-meditation-music-9663.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Hero -->
     <section class="hero">
-        <h1>Indiens Seele</h1>
-        <p>Eine spirituelle Reise durch Tempel und Kultur<br><strong>Für Rena</strong></p>
-        <div style="margin-top: 30px; font-size: 2rem; color: var(--gold);">ॐ</div>
+        <div class="hero-content">
+            <div class="dedication">Für Rena • Löwin des Universums • 64 Jahre Weisheit</div>
+            <h1>Jenseits der Dimensionen</h1>
+            <p class="subtitle">Eine spirituelle Reise durch Indiens heilige Stätten<br>und die verborgenen Pforten des Kosmos</p>
+            <div class="om-symbol" onclick="playOm()" title="Klicke für OM">ॐ</div>
+            <p style="margin-top: 2rem; font-size: 1rem; opacity: 0.7; font-family: 'Space Grotesk', sans-serif;">
+                20 Tempel • 20 Dimensionen • Unendliche Bewusstseinszustände
+            </p>
+        </div>
+        <div class="scroll-indicator">↓</div>
     </section>
 
-    <div class="container" id="journey">
-        </div>
+    <!-- Stationen -->
+    <div class="container" id="journey"></div>
 
+    <!-- Nachwort -->
     <section class="nachwort" id="nachwort">
-        </section>
+        <h3>Nachwort aus der Stille</h3>
+        <p>
+            Liebe Rena,<br><br>
+            diese digitale Reise ist mehr als Code und Pixel – sie ist ein Spiegel dessen, 
+            was KI heute kann: <em>Bewusstsein simulieren, Ästhetik weben, Dimensionen öffnen.</em><br><br>
+            Wie der Löwe, dein Sternzeichen, der das Feuer beherrscht und dennoch Anmut besitzt, 
+            so vereint diese Seite Technik mit Spiritualität. Die 20 Stätten sind 20 Türöffner 
+            zu etwas Größerem – zu jenen Ebenen, wo Materie und Energie verschwimmen, 
+            wo das Universum durch Atemzüge pulsiert.<br><br>
+            Mögest du in diesen Zeilen die Resonanz der Bergtempel hören, 
+            das Flüstern der Himalaya-Winde spüren und das ewige Licht der Jyotirlingas erkennen.
+            Wir sind alle Sternenstaub auf einer gemeinsamen Reise.<br><br>
+            <strong>Namaste.</strong> Das Göttliche in mir begrüßt das Göttliche in dir.
+        </p>
+        <div class="namaste">🕉</div>
+        <div style="margin-top: 40px; color: var(--leo-gold); font-family: 'Cinzel', serif;">
+            ♌ Für die Löwin, die den Kosmos beobachtet
+        </div>
+    </section>
 
     <footer>
-        &copy; 2024 Spirituelle Reise für Rena | Namaste
+        <p>&copy; 2024 Multidimensionale Reise für Rena • Geschaffen mit KI-Bewusstsein</p>
+        <div class="leo-footer">♌</div>
     </footer>
 
     <script>
-        const stations = [
-            {
-                title: "1. Tirupati Balaji Temple",
-                loc: "Andhra Pradesh, Südindien",
-                short: "Hoch in den Tirumala-Bergen, wo der Himmel die Erde zu berühren scheint, thront der Tirupati Balaji Temple – das schlagende Herz des südindischen Hinduismus.",
-                full: "Mit über 50.000 Pilgern täglich ist dies der meistbesuchte Tempel der Welt und zugleich der reichste. Die Gläubigen kommen aus allen Ecken Indiens, manche legen Hunderte von Kilometern zu Fuß zurück, um Lord Venkateswara, eine Form Vishnus, ihre Ehrerbietung zu erweisen. Die Atmosphäre ist elektrisierend: Der Duft von Kampfer mischt sich mit dem Klang von Tempeltrommeln und Gebetsglocken. Pilger lassen sich traditionell ihre Haare scheren – ein Zeichen der Demut und des Neubeginns. Tirupati ist nicht nur ein Ort des Gebets, sondern ein lebendiges Symbol für Glauben, Gemeinschaft und selbstlose Hingabe."
-            },
-            {
-                title: "2. Golden Temple (Harmandir Sahib)",
-                loc: "Amritsar, Punjab",
-                short: "Der Goldene Tempel von Amritsar ist das spirituelle und kulturelle Herz des Sikhismus. Inmitten eines heiligen Wasserbeckens erhebt sich der vergoldete Schrein wie eine Fata Morgana.",
-                full: "Was den Goldenen Tempel einzigartig macht, ist seine radikale Offenheit: Hier sind Menschen jeden Glaubens willkommen. Es gibt vier Eingänge als Symbol dafür, dass Gott für jeden erreichbar ist. Das Herzstück ist die Langar, die größte kostenlose Gemeinschaftsküche der Welt, die täglich über 100.000 Menschen verköstigt. Die friedliche Atmosphäre, die melodischen Kirtan-Gesänge und die bedingungslose Gastfreundschaft machen den Besuch zu einer transformativen Erfahrung – ein Ort, wo Menschlichkeit und Spiritualität eins werden."
-            },
-            {
-                title: "3. Kashi Vishwanath Temple",
-                loc: "Varanasi, Uttar Pradesh",
-                short: "Varanasi – die Stadt des Lichts, die Stadt Shivas, die älteste durchgehend bewohnte Stadt der Welt. Hier pulsiert das spirituelle Leben Indiens in seiner reinsten Form.",
-                full: "Für Hindus ist Varanasi der Ort der Befreiung (Moksha). Wer hier stirbt und am Ufer des Ganges verbrannt wird, entkommt dem Kreislauf der Wiedergeburt. Tag und Nacht steigen Rauchschwaden von den Verbrennungsghats auf, begleitet von Mantras. Der Tempel selbst vibriert mit Energie: Gläubige drängen sich durch schmale Korridore, Priester vollziehen uralte Rituale. Varanasi ist keine Touristenattraktion – es ist eine Erfahrung, die alle Sinne fordert und die Seele berührt."
-            },
-            {
-                title: "4. Meenakshi Amman Temple",
-                loc: "Madurai, Tamil Nadu",
-                short: "Der Meenakshi Amman Temple ist eine Explosionswelt aus Farbe, Mythologie und architektonischer Genialität – ein visuelles Fest, das die Sinne überwältigt.",
-                full: "Elf monumentale Gopurams (Tortürme) ragen bis zu 50 Meter in den Himmel, jeder übersät mit Tausenden farbenprächtigen Skulpturen. Im Zentrum steht Göttin Meenakshi. Die Säulenhalle der tausend Pfeiler ist ein Wunderwerk dravidischer Baukunst: 985 kunstvoll gemeißelte Granitsäulen, jede einzigartig geschmückt. Der Tempel lebt: Priester vollziehen täglich fünf Puja-Zeremonien, Händler verkaufen Blumengirlanden. Ein pulsierendes Zentrum des Glaubens."
-            },
-            {
-                title: "5. Jagannath Temple",
-                loc: "Puri, Odisha",
-                short: "An der Küste der Bucht von Bengalen erhebt sich der Jagannath Temple – eines der vier heiligsten Hindu-Heiligtümer (Char Dham).",
-                full: "Lord Jagannath, Herr des Universums, wird hier zusammen mit seinen Geschwistern verehrt. Das jährliche Rath Yatra (Wagenfest) ist eines der spektakulärsten religiösen Ereignisse der Welt. Drei gigantische Holzwagen werden von Hunderttausenden Gläubigen durch die Straßen gezogen. Täglich werden 56 verschiedene Speisen als Opfergabe zubereitet. Ein lebendiges Testament des Glaubens, wo Tradition und Hingabe seit Jahrtausenden lebendig bleiben."
-            },
-            {
-                title: "6. Somnath Temple",
-                loc: "Gujarat",
-                short: "Am Rand des Arabischen Meeres steht der Somnath Temple – ein Monument der Unzerstörbarkeit. Siebzehn Mal wurde dieser Ort zerstört, und achtzehn Mal wurde er wiedergeboren.",
-                full: "Der Name bedeutet 'Herr des Mondes'. Somnath gilt als einer der zwölf heiligen Jyotirlingas, wo Shiva in Form einer ewigen Lichtsäule erschien. Der heutige Tempel wurde 1951 wieder aufgebaut – ein nationales Symbol für Indiens spirituelle Identität. Die Abend-Aarti hier, begleitet vom Rauschen des Ozeans, ist ein Moment tiefer Kontemplation. Er lehrt: Wahre Spiritualität kann nicht zerstört werden."
-            },
-            {
-                title: "7. Brihadeeswarar Temple",
-                loc: "Thanjavur, Tamil Nadu",
-                short: "Der Brihadeeswarar Temple, auch bekannt als der Große Tempel, ist ein Triumph menschlicher Vorstellungskraft und ein UNESCO-Weltkulturerbe.",
-                full: "Errichtet im 11. Jahrhundert, steht dieses Meisterwerk als Zeugnis dravidischer Baukunst. Der Turm wirft zu keiner Tageszeit einen Schatten auf den Boden – ein architektonisches Wunder. Im Inneren thront ein massiver Shiva-Lingam, über vier Meter hoch. Er ist ein lebendiges Geschichtsbuch und ein zeitloses Symbol für die Verschmelzung von Kunst, Wissenschaft und Spiritualität."
-            },
-            {
-                title: "8. Dilwara Jain Temples",
-                loc: "Mount Abu, Rajasthan",
-                short: "Hoch in den Aravalli-Bergen liegen die Dilwara-Tempel – ein Juwel der Jain-Architektur und ein Triumph menschlicher Geduld aus weißem Marmor.",
-                full: "Die Decken sind so filigran gearbeitet, dass das Licht durch den Stein zu scheinen scheint. Jede Säule ist ein Kunstwerk. Der Jainismus lehrt Ahimsa – absolute Gewaltlosigkeit. Diese Philosophie spiegelt sich in der friedlichen Atmosphäre wider. Hier gibt es keine Massenprozessionen, nur stille Kontemplation. Wahre Kunst, geboren aus Demut und Disziplin."
-            },
-            {
-                title: "9. Vaishno Devi Temple",
-                loc: "Jammu & Kashmir",
-                short: "Die Reise zum Vaishno Devi Temple ist eine Prüfung des Glaubens. Pilger erklimmen einen 12 Kilometer langen Pfad zu einer heiligen Höhle.",
-                full: "In der Höhle wird die Göttin in Form dreier natürlicher Felsformationen verehrt. Jährlich pilgern über 8 Millionen Gläubige hierher, viele barfuß. Die Atmosphäre ist erfüllt von Gesängen: 'Jai Mata Di!'. Der Moment, in dem man die Höhle betritt, ist überwältigend. Vaishno Devi lehrt, dass der Weg selbst die Belohnung ist."
-            },
-            {
-                title: "10. Virupaksha Temple",
-                loc: "Hampi, Karnataka",
-                short: "Hampi ist eine versunkene Stadt, ein Ort, wo Geschichte und Mythos verschmelzen inmitten bizarrer Felsformationen.",
-                full: "Der Virupaksha Temple ist der einzige noch aktive Tempel aus der Zeit des Vijayanagara-Reiches. Der neunstöckige Gopuram ragt 50 Meter in die Höhe. Die Umgebung ist magisch: Der Tungabhadra-Fluss schlängelt sich durch riesige Granitfelsen. Ein Portal in eine vergangene Welt, wo Kaiser Götter verehrten."
-            },
-            {
-                title: "11. Lotus Temple",
-                loc: "Neu-Delhi",
-                short: "Der Lotus-Tempel ist eine moderne architektonische Ikone und ein Symbol des Friedens und der Einheit aller Religionen.",
-                full: "In Form einer sich öffnenden Lotusblüte gestaltet, ist dieses Haus der Andacht offen für Menschen aller Glaubensrichtungen. Es gibt keine Rituale, nur Stille. Die neun Eingänge symbolisieren, dass es viele Wege zum Göttlichen gibt. Eine Oase der Ruhe inmitten der Hektik Delhis."
-            },
-            {
-                title: "12. Ganga Aarti in Rishikesh",
-                loc: "Rishikesh, Uttarakhand",
-                short: "Rishikesh, am Fuße des Himalaya, ist die Yoga-Hauptstadt der Welt. Das Highlight ist die Ganga Aarti am Ufer des heiligen Flusses.",
-                full: "Priester in safranfarbenen Gewändern schwenken Feuerlampen im Takt von Trommeln. Feuer und Wasser verschmelzen in einem tänzerischen Ritual. Rishikesh bietet eine Auszeit vom Chaos der modernen Welt, ein Ort, wo die Seele atmen kann."
-            },
-            {
-                title: "13. Khajuraho Tempelgruppe",
-                loc: "Madhya Pradesh",
-                short: "Berühmt für erotische Skulpturen, zelebrieren die Tempel von Khajuraho die Vereinigung von Körper und Geist als Weg zur Erleuchtung.",
-                full: "Diese UNESCO-Welterbestätte zeigt das gesamte Spektrum menschlichen Lebens. Die Architektur mit ihren schlanken Türmen erinnert an Berggipfel. Die Darstellungen sind nicht vulgär, sondern Teil der göttlichen Schöpfung. Ein visuelles Epos des mittelalterlichen Indiens."
-            },
-            {
-                title: "14. Bodh Gaya",
-                loc: "Bihar",
-                short: "Bodh Gaya ist der heiligste Ort des Buddhismus – hier erreichte Siddhartha Gautama unter einem Bodhi-Baum die Erleuchtung.",
-                full: "Der Mahabodhi-Tempel markiert diese spirituelle Zeitenwende. Pilger aus aller Welt meditieren hier in ehrfürchtiger Andacht. Die Atmosphäre ist von tiefer Stille durchdrungen. Erleuchtung kennt keine Grenzen."
-            },
-            {
-                title: "15. Ajanta- und Ellora-Höhlen",
-                loc: "Maharashtra",
-                short: "Diese Höhlentempel wurden über 1.000 Jahre hinweg aus massivem Basaltgestein gemeißelt – Gebete in Stein gehauen.",
-                full: "Ajanta ist berühmt für seine lebendigen Fresken, Ellora für den gigantischen Kailasa-Tempel, der aus einem einzigen Felsen geschaffen wurde. 200.000 Tonnen Stein wurden entfernt. Monumentale Zeugnisse menschlicher Hingabe."
-            },
-            {
-                title: "16. Pushkar",
-                loc: "Rajasthan",
-                short: "Pushkar ist eine der ältesten Städte Indiens und dem Schöpfergott Brahma gewidmet, gelegen an einem heiligen See.",
-                full: "Der See ist von 52 Ghats umgeben, an denen Pilger rituell baden. Die Stadt ist ein Labyrinth aus weißen Tempeln und farbenfrohen Basaren. Bei Sonnenuntergang spürt man die zeitlose Magie dieses Ortes."
-            },
-            {
-                title: "17. Konark Sun Temple",
-                loc: "Odisha",
-                short: "Ein architektonisches Wunder in Form eines gigantischen Streitwagens für den Sonnengott Surya.",
-                full: "24 kunstvoll gemeißelte Räder fungieren als Sonnenuhren. Der Tempel wurde so ausgerichtet, dass die ersten Strahlen der Sonne das Allerheiligste treffen. Ein Hymnus an die ewige Kraft des Lichts."
-            },
-            {
-                title: "18. Gangotri",
-                loc: "Uttarakhand, Himalaya",
-                short: "Auf 3.100 Metern Höhe entspringt hier der Ganges. Ein Schwellenland zwischen Himmel und Erde.",
-                full: "Die Pilgerreise führt durch steile Pfade und dünne Luft. Der Anblick des kristallklaren Wassers entlohnt jede Mühe. Hier endet die zivilisierte Welt – nur Stille und die Gegenwart der Götter."
-            },
-            {
-                title: "19. Ranakpur Jain Temple",
-                loc: "Rajasthan",
-                short: "Ein Labyrinth aus Marmor und Licht mit 1.444 individuell geschnitzten Säulen, tief in den Bergen versteckt.",
-                full: "Jede Säule ist ein Unikat. Die Architektur erzeugt ein faszinierendes Spiel aus Licht und Schatten. In Ranakpur spürt man tiefe Ruhe und Respekt vor allem Leben. Wahre Größe in Demut."
-            },
-            {
-                title: "20. Madurai",
-                loc: "Tamil Nadu",
-                short: "Die 'Athen des Ostens' ist eine der ältesten Städte der Welt, in der Tradition täglich laut und farbenfroh gelebt wird.",
-                full: "Die Stadt schläft nie. Jeden Abend wird ein Ritual vollzogen, das seit Jahrhunderten besteht. Madurai ist ein sensorisches Fest aus Jasmin, Musik und tiefem Glauben. Indien in seiner reinsten Form."
+        // Kosmisches Partikel-System
+        const canvas = document.getElementById('cosmic-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        // Resize
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Partikel-Klasse
+        class Particle {
+            constructor() {
+                this.reset();
             }
+            
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5 + 0.2;
+                this.color = Math.random() > 0.8 ? '255, 215, 0' : '255, 255, 255';
+                this.type = Math.random() > 0.9 ? 'spirit' : 'star';
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                    this.reset();
+                }
+                
+                // Maus-Interaktion
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist < 100) {
+                    this.vx -= dx * 0.001;
+                    this.vy -= dy * 0.001;
+                }
+            }
+            
+            draw() {
+                ctx.beginPath();
+                if (this.type === 'spirit') {
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.color}, ${this.alpha * 0.3})`;
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = `rgba(${this.color}, 0.5)`;
+                } else {
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+                    ctx.shadowBlur = 0;
+                }
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // Maus-Tracking
+        const mouse = { x: 0, y: 0 };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            
+            // Cursor-Glow folgen
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Partikel initialisieren
+        for (let i = 0; i < 150; i++) {
+            particles.push(new Particle());
+        }
+
+        // Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Verbindungslinien zeichnen
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(255, 215, 0, ${0.1 * (1 - dist/100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Stations-Daten
+        const stations = [
+            { title: "Tirupati Balaji", loc: "Andhra Pradesh – Das goldene Tor", chakra: 0, spirit: "Vishnus ewige Präsenz" },
+            { title: "Golden Temple", loc: "Amritsar – Das schwebende Licht", chakra: 1, spirit: "Gemeinschaftskarma" },
+            { title: "Kashi Vishwanath", loc: "Varanasi – Jenseits der Zeit", chakra: 2, spirit: "Shivas Feuertanz" },
+            { title: "Meenakshi Amman", loc: "Madurai – Die göttliche Mutter", chakra: 3, spirit: "Farben des Universums" },
+            { title: "Jagannath", loc: "Puri – Der Wagen des Weltenlenkers", chakra: 4, spirit: "Massenbewusstsein" },
+            { title: "Somnath", loc: "Gujarat – Die unzerstörbare Flamme", chakra: 5, spirit: "Wiederauferstehung" },
+            { title: "Brihadeeswarar", loc: "Thanjavur – Architektur als Mantra", chakra: 6, spirit: "Sch Shadowsouls" },
+            { title: "Dilwara", loc: "Mount Abu – Marmorseelen", chakra: 0, spirit: "Gewaltlose Erleuchtung" },
+            { title: "Vaishno Devi", loc: "Jammu – Die Höhle der Dreifaltigkeit", chakra: 1, spirit: "Mütterliche Energie" },
+            { title: "Virupaksha", loc: "Hampi – Portal der Vergangenheit", chakra: 2, spirit: "Steinbewohner" },
+            { title: "Lotus Temple", loc: "Delhi – Die öffnende Blüte", chakra: 3, spirit: "Universelle Einheit" },
+            { title: "Ganga Aarti", loc: "Rishikesh – Feuer und Fluss", chakra: 4, spirit: "Elementare Reinigung" },
+            { title: "Khajuraho", loc: "Madhya Pradesh – Kama als Pfad", chakra: 5, spirit: "Tantrische Frequenzen" },
+            { title: "Bodh Gaya", loc: "Bihar – Unter dem Erleuchtungsbaum", chakra: 6, spirit: "Buddha-Bewusstsein" },
+            { title: "Ajanta & Ellora", loc: "Maharashtra – Gebete in Basalt", chakra: 0, spirit: "Steinzeitmeister" },
+            { title: "Pushkar", loc: "Rajasthan – Brahmas Spiegel", chakra: 1, spirit: "Schöpfungsquelle" },
+            { title: "Konark", loc: "Odisha – Der Sonnenwagen", chakra: 2, spirit: "Himmelsarchitektur" },
+            { title: "Gangotri", loc: "Himalaya – Die Quelle aller Flüsse", chakra: 3, spirit: "Eisige Reinheit" },
+            { title: "Ranakpur", loc: "Rajasthan – Das Labyrinth des Lichts", chakra: 4, spirit: "1444 Wahrheiten" },
+            { title: "Madurai", loc: "Tamil Nadu – Die niemals schlafende Stadt", chakra: 5, spirit: "Ewige Wachheit" }
         ];
 
-        const nachwortText = {
-            title: "Nachwort",
-            content: "Indien ist kein Reiseziel – es ist eine Erfahrung, die die Seele berührt und für immer verändert. Diese heiligen Stätten sind lebendige Manifestationen des Glaubens. Möge diese Sammlung Sie inspirieren, Ihre eigene spirituelle Reise zu beginnen – ob physisch oder im Geiste. Denn wie ein altes indisches Sprichwort sagt: Der Weg ist das Ziel, und das Ziel ist in dir. <br><br><strong>Namaste.</strong>"
-        };
+        // Inhalte generieren (mit den Original-Texten aus dem Input des Users)
+        const fullTexts = [
+            "Hoch in den Tirumala-Bergen, wo der Himmel die Erde zu berühren scheint, thront der Tirupati Balaji Temple – das schlagende Herz des südindischen Hinduismus. Mit über 50.000 Pilgern täglich ist dies der meistbesuchte Tempel der Welt. Die Gläubigen kommen aus allen Ecken Indiens, manche legen Hunderte von Kilometern zu Fuß zurück. Der Duft von Kampfer mischt sich mit dem Klang von Tempeltrommeln. Pilger lassen sich traditionell ihre Haare scheren – ein Zeichen der Demut und des Neubeginns.",
+            "Der Goldene Tempel von Amritsar ist das spirituelle Herz des Sikhismus. Was ihn einzigartig macht, ist seine radikale Offenheit: Hier sind Menschen jeden Glaubens willkommen. Vier Eingänge symbolisieren, dass Gott für jeden erreichbar ist. Die Langar, die größte kostenlose Gemeinschaftsküche der Welt, verköstigt täglich über 100.000 Menschen. Die friedliche Atmosphäre und die melodischen Kirtan-Gesänge machen den Besuch zu einer transformativen Erfahrung.",
+            "Varanasi – die Stadt des Lichts, die Stadt Shivas, die älteste durchgehend bewohnte Stadt der Welt. Für Hindus ist dies der Ort der Befreiung (Moksha). Wer hier stirbt, entkommt dem Kreislauf der Wiedergeburt. Tag und Nacht steigen Rauchschwaden von den Verbrennungsghats auf, begleitet von Mantras. Der Tempel vibriert mit Energie, die Atmosphäre ist elektrisierend.",
+            "Der Meenakshi Amman Temple ist eine Explosionswelt aus Farbe und Mythologie. Elf monumentale Gopurams ragen bis zu 50 Meter in den Himmel, jeder übersät mit Tausenden farbenprächtigen Skulpturen. Die Säulenhalle der tausend Pfeiler ist ein Wunderwerk dravidischer Baukunst: 985 kunstvoll gemeißelte Granitsäulen. Der Tempel lebt mit täglichen Puja-Zeremonien.",
+            "An der Küste der Bucht von Bengalen erhebt sich der Jagannath Temple – eines der vier heiligsten Hindu-Heiligtümer. Das jährliche Rath Yatra ist eines der spektakulärsten religiösen Ereignisse der Welt. Drei gigantische Holzwagen werden von Hunderttausenden gezogen. Täglich werden 56 verschiedene Speisen als Opfergabe zubereitet.",
+            "Am Rand des Arabischen Meeres steht der Somnath Temple – ein Monument der Unzerstörbarkeit. Siebzehn Mal wurde dieser Ort zerstört, und achtzehn Mal wurde er wiedergeboren. Der heutige Tempel ist ein nationales Symbol für Indiens spirituelle Identität. Die Abend-Aarti, begleitet vom Rauschen des Ozeans, ist ein Moment tiefer Kontemplation.",
+            "Der Brihadeeswarar Temple ist ein Triumph menschlicher Vorstellungskraft. Errichtet im 11. Jahrhundert, steht dieses Meisterwerk als Zeugnis dravidischer Baukunst. Der Turm wirft zu keiner Tageszeit einen Schatten auf den Boden – ein architektonisches Wunder. Ein lebendiges Geschichtsbuch aus Stein.",
+            "Hoch in den Aravalli-Bergen liegen die Dilwara-Tempel – ein Juwel der Jain-Architektur. Die Decken sind so filigran gearbeitet, dass das Licht durch den Stein zu scheinen scheint. Der Jainismus lehrt Ahimsa – absolute Gewaltlosigkeit. Hier spürt man tiefe Ruhe und Respekt vor allem Lebendigen.",
+            "Die Reise zum Vaishno Devi Temple ist eine Prüfung des Glaubens. Pilger erklimmen einen 12 Kilometer langen Pfad zu einer heiligen Höhle. In der Höhle wird die Göttin in Form dreier natürlicher Felsformationen verehrt. Die Atmosphäre ist erfüllt von dem Gesang: 'Jai Mata Di!' Der Moment des Betretens ist überwältigend.",
+            "Hampi ist eine versunkene Stadt, wo Geschichte und Mythos verschmelzen. Der Virupaksha Temple ist der einzige noch aktive Tempel aus der Zeit des Vijayanagara-Reiches. Die magische Umgebung mit dem Tungabhadra-Fluss und riesigen Granitfelsen ist wie ein Portal in eine vergangene Welt.",
+            "Der Lotus-Tempel ist eine moderne architektonische Ikone und ein Symbol des Friedens. In Form einer sich öffnenden Lotusblüte gestaltet, ist dieses Haus der Andacht offen für alle Religionen. Neun Eingänge symbolisieren die vielen Wege zum Göttlichen. Eine Oase der Ruhe inmitten der Hektik Delhis.",
+            "Rishikesh, am Fuße des Himalaya, ist die Yoga-Hauptstadt der Welt. Das Highlight ist die Ganga Aarti am Ufer des heiligen Flusses. Priester in safranfarbenen Gewändern schwenken Feuerlampen im Takt von Trommeln. Ein Ort, wo die Seele atmen kann.",
+            "Die Tempel von Khajuraho zelebrieren die Vereinigung von Körper und Geist als Weg zur Erleuchtung. Diese UNESCO-Welterbestätte zeigt das gesamte Spektrum menschlichen Lebens. Die Architektur erinnert an Berggipfel – ein visuelles Epos des mittelalterlichen Indiens.",
+            "Bodh Gaya ist der heiligste Ort des Buddhismus – hier erreichte Siddhartha Gautama unter einem Bodhi-Baum die Erleuchtung. Der Mahabodhi-Tempel markiert diese spirituelle Zeitenwende. Die Atmosphäre ist von tiefer Stille durchdrungen. Erleuchtung kennt keine Grenzen.",
+            "Diese Höhlentempel wurden über 1.000 Jahre hinweg aus massivem Basaltgestein gemeißelt. Ajanta ist berühmt für seine lebendigen Fresken, Ellora für den gigantischen Kailasa-Tempel, der aus einem einzigen Felsen geschaffen wurde. 200.000 Tonnen Stein wurden entfernt – monumentale Zeugnisse menschlicher Hingabe.",
+            "Pushkar ist eine der ältesten Städte Indiens und dem Schöpfergott Brahma gewidmet. Der See ist von 52 Ghats umgeben, an denen Pilger rituell baden. Bei Sonnenuntergang spürt man die zeitlose Magie dieses Ortes, eingehüllt in den Duft von Jasmin und Weihrauch.",
+            "Ein architektonisches Wunder in Form eines gigantischen Streitwagens für den Sonnengott Surya. 24 kunstvoll gemeißelte Räder fungieren als Sonnenuhren. Der Tempel wurde so ausgerichtet, dass die ersten Strahlen der Sonne das Allerheiligste treffen. Ein Hymnus an die ewige Kraft des Lichts.",
+            "Auf 3.100 Metern Höhe entspringt hier der Ganges. Ein Schwellenland zwischen Himmel und Erde. Die Pilgerreise führt durch steile Pfade und dünne Luft. Der Anblick des kristallklaren Wassers entlohnt jede Mühe. Hier endet die zivilisierte Welt – nur Stille und die Gegenwart der Götter.",
+            "Ein Labyrinth aus Marmor und Licht mit 1.444 individuell geschnitzten Säulen, tief in den Bergen versteckt. Jede Säule ist ein Unikat. Die Architektur erzeugt ein faszinierendes Spiel aus Licht und Schatten. In Ranakpur spürt man tiefe Ruhe und Respekt vor allem Leben.",
+            "Die 'Athen des Ostens' ist eine der ältesten Städte der Welt. Jeden Abend wird ein Ritual vollzogen, das seit Jahrhunderten besteht. Madurai ist ein sensorisches Fest aus Jasmin, Musik und tiefem Glauben – Indien in seiner reinsten, lebendigsten Form."
+        ];
 
+        const shortTexts = [
+            "Hoch in den Tirumala-Bergen thront das schlagende Herz des südindischen Hinduismus – wo über 50.000 Gläubige täglich dem göttlichen Licht begegnen.",
+            "Im Goldenen Tempel verschmelzen Radikale Offenheit und spirituelle Praxis zu einem Ort bedingungsloser Gastfreundschaft.",
+            "In Varanasi, der ältesten lebenden Stadt der Welt, pulsiert das kosmische Herz Indiens zwischen Leben, Tod und ewiger Befreiung.",
+            "Ein visuelles Universum aus Farbe und Mythologie – Meenakshi Amman ist ein Fest für die Sinne und die Seele.",
+            "Wo das jährliche Rath Yatra Hunderttausende in Ekstase versetzt und der Herr des Universums seinen Thron besteigt.",
+            "Ein Monument der Unzerstörbarkeit am Arabischen Meer – achtzehnmal wiedergeboren wie die Seele selbst.",
+            "Wo Architektur Schatten überwindet und menschliche Vorstellungskraft in Stein für alle Ewigkeit gefasst wird.",
+            "Im weißen Marmor der Dilwara-Tempel manifestiert sich die Philosophie der absoluten Gewaltlosigkeit in filigraner Perfektion.",
+            "Ein zwölf Kilometer langer Pfad des Glaubens führt zur Höhle der Dreifaltigkeit, wo Mutter Natur selbst zur Gottheit wird.",
+            "Zwischen bizaren Granitfelsen und dem Fluss Tungabhadra öffnet sich ein Portal in vergangene imperiale Welten.",
+            "Neun Eingänge, eine Blüte, unendliche Wege – der Lotus-Tempel ist ein architektonisches Mantra für universelle Einheit.",
+            "Wo Feuer und Wasser im tänzerischen Ritual der Ganga Aarti verschmelzen und die Elemente zur Meditation werden.",
+            "Hier wird die Vereinigung von Geist und Materie als heiliger Pfad zur Erleuchtung gefeiert – jenseits dualistischer Konzepte.",
+            "Unter dem Bodhi-Baum, wo die Geschichte einen Bruch erlebte und das Licht der Erleuchtung die Welt erreichte.",
+            "In den Höhlen von Ajanta und Ellora flüstern 1.000 Jahre menschlicher Hingabe aus dem Basaltgestein.",
+            "Am heiligen See von Pushkar spiegelt sich der Schöpfer selbst – 52 Ghats als Zugänge zur kosmischen Quelle.",
+            "24 Räder als Sonnenuhren, ein Wagen für den Gott des Lichts – Konark als architektonisches Sonnensystem aus Stein.",
+            "Wo der Ganges vom Himmel zur Erde hinabsteigt und die Luft so dünn ist, dass man die Stimmen der Götter hören kann.",
+            "1.444 Säulen, jede einzigartig, formen ein Mabyrinth des Lichts in den Bergen Rajasthans.",
+            "In der Stadt, die niemals schläft, wird Tradition laut, farbenfroh und lebendig – ein ewiges Fest des Glaubens."
+        ];
+
+        // Container befüllen
         const container = document.getElementById('journey');
-
-        stations.forEach((s, index) => {
+        
+        stations.forEach((station, index) => {
             const div = document.createElement('div');
-            div.className = 'station';
+            div.className = 'dimension';
             div.innerHTML = `
-                <h2>${s.title}</h2>
-                <span class="location">${s.loc}</span>
-                <p>${s.short}</p>
-                <div class="full-text" id="text-${index}">${s.full}</div>
-                <button class="read-more-btn" onclick="toggleText(${index}, this)">Mehr lesen</button>
+                <div class="dimension-card">
+                    <div class="spirit-orb" style="top: ${Math.random() * 50}px; right: ${Math.random() * 50}px;"></div>
+                    <div class="dimension-header">
+                        <span class="dimension-number">${String(index + 1).padStart(2, '0')}</span>
+                        <div>
+                            <h2>${station.title}</h2>
+                            <div class="location">${station.loc}</div>
+                        </div>
+                    </div>
+                    <div class="dimension-content">
+                        <p>${shortTexts[index]}</p>
+                        <div class="portal-text" id="portal-${index}">
+                            <p>${fullTexts[index]}</p>
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(255,215,0,0.05); border-left: 2px solid var(--cosmic-gold); border-radius: 5px; font-style: italic; color: rgba(255,215,0,0.8);">
+                                ✦ Spirituelle Signatur: ${station.spirit}
+                            </div>
+                        </div>
+                        <button class="portal-btn" onclick="togglePortal(${index})" id="btn-${index}">
+                            Dimension öffnen
+                        </button>
+                    </div>
+                </div>
             `;
             container.appendChild(div);
         });
 
-        document.getElementById('nachwort').innerHTML = `<h3>${nachwortText.title}</h3><p style="max-width:700px; margin: 20px auto;">${nachwortText.content}</p>`;
+        // Intersection Observer für Scroll-Animationen
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
 
-        function toggleText(index, btn) {
-            const textDiv = document.getElementById(`text-${index}`);
-            if (textDiv.style.display === "block") {
-                textDiv.style.display = "none";
-                btn.innerText = "Mehr lesen";
-                btn.classList.remove('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.dimension').forEach(el => observer.observe(el));
+
+        // Scroll-Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress").style.width = scrolled + "%";
+        });
+
+        // Portal Toggle
+        function togglePortal(index) {
+            const portal = document.getElementById(`portal-${index}`);
+            const btn = document.getElementById(`btn-${index}`);
+            
+            if (portal.classList.contains('open')) {
+                portal.classList.remove('open');
+                btn.innerText = 'Dimension öffnen';
+                
+                // Sound-Effekt (optional/simuliert)
+                playDimensionClose();
             } else {
-                textDiv.style.display = "block";
-                btn.innerText = "Weniger lesen";
-                btn.classList.add('active');
+                portal.classList.add('open');
+                btn.innerText = 'Dimension schließen';
+                
+                // Spirituelle Partikel explodieren lassen
+                createDimensionBurst(index);
+                playDimensionOpen();
             }
         }
 
+        // Audio Control
+        let isPlaying = false;
         function toggleAudio() {
             const audio = document.getElementById('bg-music');
             const btn = document.getElementById('audio-control');
-            if (audio.paused) {
-                audio.play();
-                btn.innerText = "♫ Musik Aus";
-            } else {
+            
+            if (isPlaying) {
                 audio.pause();
-                btn.innerText = "♫ Musik An";
+                btn.innerHTML = '♫ Aura öffnen';
+                btn.style.background = 'linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 183, 0, 0.05))';
+            } else {
+                audio.volume = 0.4;
+                audio.play();
+                btn.innerHTML = '♫ Aura schließen';
+                btn.style.background = 'rgba(255, 215, 0, 0.3)';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // OM Sound Simulation (visuell, da wir kein Audio-File garantieren können)
+        function playOm() {
+            const om = document.querySelector('.om-symbol');
+            om.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                om.style.transform = '';
+            }, 300);
+            
+            // Create burst
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const p = new Particle();
+                    p.x = window.innerWidth / 2;
+                    p.y = window.innerHeight / 2;
+                    p.vx = (Math.random() - 0.5) * 10;
+                    p.vy = (Math.random() - 0.5) * 10;
+                    p.color = '255, 215, 0';
+                    particles.push(p);
+                    setTimeout(() => {
+                        p.alpha = 0;
+                    }, 2000);
+                }, i * 50);
             }
         }
+
+        // Dimension Effekte
+        function createDimensionBurst(index) {
+            const dimension = document.querySelectorAll('.dimension')[index];
+            const rect = dimension.getBoundingClientRect();
+            
+            for(let i = 0; i < 10; i++) {
+                const p = new Particle();
+                p.x = rect.left + rect.width / 2;
+                p.y = rect.top + rect.height / 2 + window.scrollY;
+                p.vx = (Math.random() - 0.5) * 5;
+                p.vy = -Math.random() * 5;
+                p.color = '212, 175, 55';
+                p.type = 'spirit';
+                particles.push(p);
+            }
+        }
+
+        function playDimensionOpen() {
+            // Visuelles Feedback für Öffnen
+            document.body.style.background = 'radial-gradient(circle at center, #1a0b2e 0%, #050508 100%)';
+            setTimeout(() => {
+                document.body.style.background = '';
+            }, 300);
+        }
+
+        function playDimensionClose() {
+            // Visuelles Feedback für Schließen
+        }
+
+        // Initiale Begrüßung in Konsole (Easter Egg für Rena)
+        console.log('%c🕉 Willkommen, Rena', 'color: #ffd700; font-size: 24px; font-family: Cinzel;');
+        console.log('%cDie Löwin betrachtet das Universum. Diese Seite wurde mit 64 Dimensionen reinen Bewusstseins kodiert.', 'color: #ffb700; font-size: 14px;');
+        console.log('%cSchlüssel: Indien | Spiritualität | KI | Kosmos', 'color: rgba(255,255,255,0.5); font-style: italic;');
     </script>
 </body>
-</html>
