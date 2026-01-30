@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indiens Seele - Für Rena</title>
+    
+    <meta property="og:title" content="Indiens Seele - Eine Reise für Rena">
+    <meta property="og:description" content="20 heilige Stätten: Eine spirituelle Reise durch Tempel und Kultur.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://kava82.github.io/Rena/">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-red: #800000;
+            --bg-dark: #0f0f0f;
+            --text-light: #f4f4f4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Lora', serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            text-align: center;
+        }
+
+        /* Hero Sektion */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1524492707947-2f85a643199c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        .hero p { font-style: italic; font-size: 1.2rem; max-width: 600px; }
+
+        /* Audio Button */
+        #audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s;
+        }
+
+        #audio-control:hover { background: var(--gold); color: black; }
+
+        /* Stationen Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .station {
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid var(--gold);
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 0 15px 15px 0;
+            transition: transform 0.3s;
+        }
+
+        .station:hover { transform: translateX(10px); }
+
+        .station h2 { text-align: left; margin-bottom: 5px; font-size: 1.8rem; }
+        .location { color: var(--gold); font-weight: bold; margin-bottom: 15px; display: block; font-family: 'Cinzel'; font-size: 0.9rem;}
+
+        /* Mehr Lesen Logik */
+        .full-text {
+            display: none;
+            margin-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 15px;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--gold);
+            cursor: pointer;
+            font-family: 'Cinzel';
+            font-weight: bold;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .read-more-btn::after { content: ' ▼'; font-size: 0.7rem; margin-left: 5px; }
+        .read-more-btn.active::after { content: ' ▲'; }
+
+        .nachwort {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(transparent, rgba(212, 175, 55, 0.1));
+        }
+
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; opacity: 0.6; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .station { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="audio-control" onclick="toggleAudio()">♫ Musik An</button>
+    <audio id="bg-music" loop>
+        <source src="sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <section class="hero">
+        <h1>Indiens Seele</h1>
+        <p>Eine spirituelle Reise durch Tempel und Kultur<br><strong>Für Rena</strong></p>
+        <div style="margin-top: 30px; font-size: 2rem; color: var(--gold);">ॐ</div>
+    </section>
+
+    <div class="container" id="journey">
+        </div>
+
+    <section class="nachwort" id="nachwort">
+        </section>
+
+    <footer>
+        &copy; 2024 Spirituelle Reise für Rena | Namaste
+    </footer>
+
+    <script>
+        const stations = [
+            {
+                title: "1. Tirupati Balaji Temple",
+                loc: "Andhra Pradesh, Südindien",
+                short: "Hoch in den Tirumala-Bergen, wo der Himmel die Erde zu berühren scheint, thront der Tirupati Balaji Temple – das schlagende Herz des südindischen Hinduismus.",
+                full: "Mit über 50.000 Pilgern täglich ist dies der meistbesuchte Tempel der Welt und zugleich der reichste. Die Gläubigen kommen aus allen Ecken Indiens, manche legen Hunderte von Kilometern zu Fuß zurück, um Lord Venkateswara, eine Form Vishnus, ihre Ehrerbietung zu erweisen. Die Atmosphäre ist elektrisierend: Der Duft von Kampfer mischt sich mit dem Klang von Tempeltrommeln und Gebetsglocken. Pilger lassen sich traditionell ihre Haare scheren – ein Zeichen der Demut und des Neubeginns. Tirupati ist nicht nur ein Ort des Gebets, sondern ein lebendiges Symbol für Glauben, Gemeinschaft und selbstlose Hingabe."
+            },
+            {
+                title: "2. Golden Temple (Harmandir Sahib)",
+                loc: "Amritsar, Punjab",
+                short: "Der Goldene Tempel von Amritsar ist das spirituelle und kulturelle Herz des Sikhismus. Inmitten eines heiligen Wasserbeckens erhebt sich der vergoldete Schrein wie eine Fata Morgana.",
+                full: "Was den Goldenen Tempel einzigartig macht, ist seine radikale Offenheit: Hier sind Menschen jeden Glaubens willkommen. Es gibt vier Eingänge als Symbol dafür, dass Gott für jeden erreichbar ist. Das Herzstück ist die Langar, die größte kostenlose Gemeinschaftsküche der Welt, die täglich über 100.000 Menschen verköstigt. Die friedliche Atmosphäre, die melodischen Kirtan-Gesänge und die bedingungslose Gastfreundschaft machen den Besuch zu einer transformativen Erfahrung – ein Ort, wo Menschlichkeit und Spiritualität eins werden."
+            },
+            {
+                title: "3. Kashi Vishwanath Temple",
+                loc: "Varanasi, Uttar Pradesh",
+                short: "Varanasi – die Stadt des Lichts, die Stadt Shivas, die älteste durchgehend bewohnte Stadt der Welt. Hier pulsiert das spirituelle Leben Indiens in seiner reinsten Form.",
+                full: "Für Hindus ist Varanasi der Ort der Befreiung (Moksha). Wer hier stirbt und am Ufer des Ganges verbrannt wird, entkommt dem Kreislauf der Wiedergeburt. Tag und Nacht steigen Rauchschwaden von den Verbrennungsghats auf, begleitet von Mantras. Der Tempel selbst vibriert mit Energie: Gläubige drängen sich durch schmale Korridore, Priester vollziehen uralte Rituale. Varanasi ist keine Touristenattraktion – es ist eine Erfahrung, die alle Sinne fordert und die Seele berührt."
+            },
+            {
+                title: "4. Meenakshi Amman Temple",
+                loc: "Madurai, Tamil Nadu",
+                short: "Der Meenakshi Amman Temple ist eine Explosionswelt aus Farbe, Mythologie und architektonischer Genialität – ein visuelles Fest, das die Sinne überwältigt.",
+                full: "Elf monumentale Gopurams (Tortürme) ragen bis zu 50 Meter in den Himmel, jeder übersät mit Tausenden farbenprächtigen Skulpturen. Im Zentrum steht Göttin Meenakshi. Die Säulenhalle der tausend Pfeiler ist ein Wunderwerk dravidischer Baukunst: 985 kunstvoll gemeißelte Granitsäulen, jede einzigartig geschmückt. Der Tempel lebt: Priester vollziehen täglich fünf Puja-Zeremonien, Händler verkaufen Blumengirlanden. Ein pulsierendes Zentrum des Glaubens."
+            },
+            {
+                title: "5. Jagannath Temple",
+                loc: "Puri, Odisha",
+                short: "An der Küste der Bucht von Bengalen erhebt sich der Jagannath Temple – eines der vier heiligsten Hindu-Heiligtümer (Char Dham).",
+                full: "Lord Jagannath, Herr des Universums, wird hier zusammen mit seinen Geschwistern verehrt. Das jährliche Rath Yatra (Wagenfest) ist eines der spektakulärsten religiösen Ereignisse der Welt. Drei gigantische Holzwagen werden von Hunderttausenden Gläubigen durch die Straßen gezogen. Täglich werden 56 verschiedene Speisen als Opfergabe zubereitet. Ein lebendiges Testament des Glaubens, wo Tradition und Hingabe seit Jahrtausenden lebendig bleiben."
+            },
+            {
+                title: "6. Somnath Temple",
+                loc: "Gujarat",
+                short: "Am Rand des Arabischen Meeres steht der Somnath Temple – ein Monument der Unzerstörbarkeit. Siebzehn Mal wurde dieser Ort zerstört, und achtzehn Mal wurde er wiedergeboren.",
+                full: "Der Name bedeutet 'Herr des Mondes'. Somnath gilt als einer der zwölf heiligen Jyotirlingas, wo Shiva in Form einer ewigen Lichtsäule erschien. Der heutige Tempel wurde 1951 wieder aufgebaut – ein nationales Symbol für Indiens spirituelle Identität. Die Abend-Aarti hier, begleitet vom Rauschen des Ozeans, ist ein Moment tiefer Kontemplation. Er lehrt: Wahre Spiritualität kann nicht zerstört werden."
+            },
+            {
+                title: "7. Brihadeeswarar Temple",
+                loc: "Thanjavur, Tamil Nadu",
+                short: "Der Brihadeeswarar Temple, auch bekannt als der Große Tempel, ist ein Triumph menschlicher Vorstellungskraft und ein UNESCO-Weltkulturerbe.",
+                full: "Errichtet im 11. Jahrhundert, steht dieses Meisterwerk als Zeugnis dravidischer Baukunst. Der Turm wirft zu keiner Tageszeit einen Schatten auf den Boden – ein architektonisches Wunder. Im Inneren thront ein massiver Shiva-Lingam, über vier Meter hoch. Er ist ein lebendiges Geschichtsbuch und ein zeitloses Symbol für die Verschmelzung von Kunst, Wissenschaft und Spiritualität."
+            },
+            {
+                title: "8. Dilwara Jain Temples",
+                loc: "Mount Abu, Rajasthan",
+                short: "Hoch in den Aravalli-Bergen liegen die Dilwara-Tempel – ein Juwel der Jain-Architektur und ein Triumph menschlicher Geduld aus weißem Marmor.",
+                full: "Die Decken sind so filigran gearbeitet, dass das Licht durch den Stein zu scheinen scheint. Jede Säule ist ein Kunstwerk. Der Jainismus lehrt Ahimsa – absolute Gewaltlosigkeit. Diese Philosophie spiegelt sich in der friedlichen Atmosphäre wider. Hier gibt es keine Massenprozessionen, nur stille Kontemplation. Wahre Kunst, geboren aus Demut und Disziplin."
+            },
+            {
+                title: "9. Vaishno Devi Temple",
+                loc: "Jammu & Kashmir",
+                short: "Die Reise zum Vaishno Devi Temple ist eine Prüfung des Glaubens. Pilger erklimmen einen 12 Kilometer langen Pfad zu einer heiligen Höhle.",
+                full: "In der Höhle wird die Göttin in Form dreier natürlicher Felsformationen verehrt. Jährlich pilgern über 8 Millionen Gläubige hierher, viele barfuß. Die Atmosphäre ist erfüllt von Gesängen: 'Jai Mata Di!'. Der Moment, in dem man die Höhle betritt, ist überwältigend. Vaishno Devi lehrt, dass der Weg selbst die Belohnung ist."
+            },
+            {
+                title: "10. Virupaksha Temple",
+                loc: "Hampi, Karnataka",
+                short: "Hampi ist eine versunkene Stadt, ein Ort, wo Geschichte und Mythos verschmelzen inmitten bizarrer Felsformationen.",
+                full: "Der Virupaksha Temple ist der einzige noch aktive Tempel aus der Zeit des Vijayanagara-Reiches. Der neunstöckige Gopuram ragt 50 Meter in die Höhe. Die Umgebung ist magisch: Der Tungabhadra-Fluss schlängelt sich durch riesige Granitfelsen. Ein Portal in eine vergangene Welt, wo Kaiser Götter verehrten."
+            },
+            {
+                title: "11. Lotus Temple",
+                loc: "Neu-Delhi",
+                short: "Der Lotus-Tempel ist eine moderne architektonische Ikone und ein Symbol des Friedens und der Einheit aller Religionen.",
+                full: "In Form einer sich öffnenden Lotusblüte gestaltet, ist dieses Haus der Andacht offen für Menschen aller Glaubensrichtungen. Es gibt keine Rituale, nur Stille. Die neun Eingänge symbolisieren, dass es viele Wege zum Göttlichen gibt. Eine Oase der Ruhe inmitten der Hektik Delhis."
+            },
+            {
+                title: "12. Ganga Aarti in Rishikesh",
+                loc: "Rishikesh, Uttarakhand",
+                short: "Rishikesh, am Fuße des Himalaya, ist die Yoga-Hauptstadt der Welt. Das Highlight ist die Ganga Aarti am Ufer des heiligen Flusses.",
+                full: "Priester in safranfarbenen Gewändern schwenken Feuerlampen im Takt von Trommeln. Feuer und Wasser verschmelzen in einem tänzerischen Ritual. Rishikesh bietet eine Auszeit vom Chaos der modernen Welt, ein Ort, wo die Seele atmen kann."
+            },
+            {
+                title: "13. Khajuraho Tempelgruppe",
+                loc: "Madhya Pradesh",
+                short: "Berühmt für erotische Skulpturen, zelebrieren die Tempel von Khajuraho die Vereinigung von Körper und Geist als Weg zur Erleuchtung.",
+                full: "Diese UNESCO-Welterbestätte zeigt das gesamte Spektrum menschlichen Lebens. Die Architektur mit ihren schlanken Türmen erinnert an Berggipfel. Die Darstellungen sind nicht vulgär, sondern Teil der göttlichen Schöpfung. Ein visuelles Epos des mittelalterlichen Indiens."
+            },
+            {
+                title: "14. Bodh Gaya",
+                loc: "Bihar",
+                short: "Bodh Gaya ist der heiligste Ort des Buddhismus – hier erreichte Siddhartha Gautama unter einem Bodhi-Baum die Erleuchtung.",
+                full: "Der Mahabodhi-Tempel markiert diese spirituelle Zeitenwende. Pilger aus aller Welt meditieren hier in ehrfürchtiger Andacht. Die Atmosphäre ist von tiefer Stille durchdrungen. Erleuchtung kennt keine Grenzen."
+            },
+            {
+                title: "15. Ajanta- und Ellora-Höhlen",
+                loc: "Maharashtra",
+                short: "Diese Höhlentempel wurden über 1.000 Jahre hinweg aus massivem Basaltgestein gemeißelt – Gebete in Stein gehauen.",
+                full: "Ajanta ist berühmt für seine lebendigen Fresken, Ellora für den gigantischen Kailasa-Tempel, der aus einem einzigen Felsen geschaffen wurde. 200.000 Tonnen Stein wurden entfernt. Monumentale Zeugnisse menschlicher Hingabe."
+            },
+            {
+                title: "16. Pushkar",
+                loc: "Rajasthan",
+                short: "Pushkar ist eine der ältesten Städte Indiens und dem Schöpfergott Brahma gewidmet, gelegen an einem heiligen See.",
+                full: "Der See ist von 52 Ghats umgeben, an denen Pilger rituell baden. Die Stadt ist ein Labyrinth aus weißen Tempeln und farbenfrohen Basaren. Bei Sonnenuntergang spürt man die zeitlose Magie dieses Ortes."
+            },
+            {
+                title: "17. Konark Sun Temple",
+                loc: "Odisha",
+                short: "Ein architektonisches Wunder in Form eines gigantischen Streitwagens für den Sonnengott Surya.",
+                full: "24 kunstvoll gemeißelte Räder fungieren als Sonnenuhren. Der Tempel wurde so ausgerichtet, dass die ersten Strahlen der Sonne das Allerheiligste treffen. Ein Hymnus an die ewige Kraft des Lichts."
+            },
+            {
+                title: "18. Gangotri",
+                loc: "Uttarakhand, Himalaya",
+                short: "Auf 3.100 Metern Höhe entspringt hier der Ganges. Ein Schwellenland zwischen Himmel und Erde.",
+                full: "Die Pilgerreise führt durch steile Pfade und dünne Luft. Der Anblick des kristallklaren Wassers entlohnt jede Mühe. Hier endet die zivilisierte Welt – nur Stille und die Gegenwart der Götter."
+            },
+            {
+                title: "19. Ranakpur Jain Temple",
+                loc: "Rajasthan",
+                short: "Ein Labyrinth aus Marmor und Licht mit 1.444 individuell geschnitzten Säulen, tief in den Bergen versteckt.",
+                full: "Jede Säule ist ein Unikat. Die Architektur erzeugt ein faszinierendes Spiel aus Licht und Schatten. In Ranakpur spürt man tiefe Ruhe und Respekt vor allem Leben. Wahre Größe in Demut."
+            },
+            {
+                title: "20. Madurai",
+                loc: "Tamil Nadu",
+                short: "Die 'Athen des Ostens' ist eine der ältesten Städte der Welt, in der Tradition täglich laut und farbenfroh gelebt wird.",
+                full: "Die Stadt schläft nie. Jeden Abend wird ein Ritual vollzogen, das seit Jahrhunderten besteht. Madurai ist ein sensorisches Fest aus Jasmin, Musik und tiefem Glauben. Indien in seiner reinsten Form."
+            }
+        ];
+
+        const nachwortText = {
+            title: "Nachwort",
+            content: "Indien ist kein Reiseziel – es ist eine Erfahrung, die die Seele berührt und für immer verändert. Diese heiligen Stätten sind lebendige Manifestationen des Glaubens. Möge diese Sammlung Sie inspirieren, Ihre eigene spirituelle Reise zu beginnen – ob physisch oder im Geiste. Denn wie ein altes indisches Sprichwort sagt: Der Weg ist das Ziel, und das Ziel ist in dir. <br><br><strong>Namaste.</strong>"
+        };
+
+        const container = document.getElementById('journey');
+
+        stations.forEach((s, index) => {
+            const div = document.createElement('div');
+            div.className = 'station';
+            div.innerHTML = `
+                <h2>${s.title}</h2>
+                <span class="location">${s.loc}</span>
+                <p>${s.short}</p>
+                <div class="full-text" id="text-${index}">${s.full}</div>
+                <button class="read-more-btn" onclick="toggleText(${index}, this)">Mehr lesen</button>
+            `;
+            container.appendChild(div);
+        });
+
+        document.getElementById('nachwort').innerHTML = `<h3>${nachwortText.title}</h3><p style="max-width:700px; margin: 20px auto;">${nachwortText.content}</p>`;
+
+        function toggleText(index, btn) {
+            const textDiv = document.getElementById(`text-${index}`);
+            if (textDiv.style.display === "block") {
+                textDiv.style.display = "none";
+                btn.innerText = "Mehr lesen";
+                btn.classList.remove('active');
+            } else {
+                textDiv.style.display = "block";
+                btn.innerText = "Weniger lesen";
+                btn.classList.add('active');
+            }
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('audio-control');
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "♫ Musik Aus";
+            } else {
+                audio.pause();
+                btn.innerText = "♫ Musik An";
+            }
+        }
+    </script>
+</body>
+</html>
